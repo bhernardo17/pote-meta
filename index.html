@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Operação Meta Batida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Kalam:wght@700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/*
+VOICE: torcida de pit stop, energia de pré-vendas, direto e vibrante
+IDEA: o pote de vidro do cartaz da Magazord enchendo de líquido vermelho
+PICTURE: pote grande com régua 0–100%, linha dourada da meta em 40%, projeção tracejada
+COLOUR and TYPE: preto profundo, vermelho Magazord #e3120b, ouro #f5b82e; Anton + Kalam (manuscrito) + Inter
+LAYOUT: título no topo, pote à esquerda e cartões de corrida à direita; empilha no celular
+*/
+:root{color-scheme:dark;--bg:#0a0708;--ink:#fff;--red:#e3120b;--red2:#ff3b2f;--gold:#f5b82e;--muted:#b9a9a9;--panel:#170e0f}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:radial-gradient(1200px 700px at 30% 40%,#3a0606 0%,#150405 45%,var(--bg) 75%);color:var(--ink);font:16px/1.5 Inter,system-ui,sans-serif;overflow-x:clip;min-height:100vh}
+.wrap{max-width:1180px;margin:0 auto;padding:clamp(18px,3vw,40px) max(4vw,16px) 40px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.5px}
+.logo b{display:grid;place-items:center;width:34px;height:34px;background:var(--red);border-radius:6px;font-family:Anton;font-size:22px;font-weight:400}
+.hand{font-family:Kalam,cursive;font-size:clamp(26px,4vw,40px);line-height:1;transform:rotate(-4deg)}
+.hand span{color:var(--red2)}
+.title{text-align:center;margin:18px 0 6px}
+.title h1{font-family:Anton,Impact,sans-serif;font-weight:400;margin:0;line-height:.95;font-size:clamp(40px,7vw,84px);font-style:italic;text-shadow:0 4px 0 #000,0 0 30px rgba(227,18,11,.5)}
+.title h1 em{color:var(--red2);font-style:italic}
+.title p{display:inline-block;margin:10px 0 0;background:var(--red);padding:6px 16px;font-family:Anton;font-size:clamp(14px,2vw,19px);transform:skewX(-10deg);letter-spacing:.5px}
+.flag{height:16px;margin:16px auto 0;max-width:420px;background:conic-gradient(#fff 25%,#111 0 50%,#fff 0 75%,#111 0) 0 0/16px 16px;opacity:.85;border-radius:3px}
+.main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:center;margin-top:26px}
+.jar{position:relative;width:100%;max-width:520px;margin:0 auto}
+.jar svg{width:100%;height:auto;display:block;overflow:visible}
+.cards{display:grid;gap:18px}
+.note{background:linear-gradient(160deg,#ffe77a,#f6cf3c);color:#1a1a1a;padding:20px 22px 18px;transform:rotate(2deg);box-shadow:0 18px 40px rgba(0,0,0,.6);border-radius:2px}
+.note .k{font-family:Kalam,cursive;font-size:26px;line-height:1}
+.note .big{font-family:Anton;color:var(--red);font-size:clamp(64px,9vw,104px);line-height:1;margin:4px 0}
+.strip{background:var(--red);color:#fff;font-family:Kalam,cursive;font-size:24px;line-height:1.15;padding:10px 16px;margin:6px -10px 0;transform:rotate(-2deg)}
+.strip small{display:block;font-family:Inter;font-weight:600;font-size:14px}
+.row{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid #3a1416;border-radius:14px;padding:14px 18px}
+.row svg{flex:none}
+.row .t{font-family:Kalam,cursive;font-size:22px;line-height:1}
+.row .v{font-family:Anton;font-size:clamp(34px,5vw,48px);line-height:1}
+.row .s{color:var(--muted);font-size:14px}
+.pend{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.pend i{width:22px;height:22px;border-radius:50%;border:2px dashed var(--gold)}
+.bottom{text-align:center;margin-top:30px}
+.bottom .hand{display:inline-block;font-size:clamp(36px,6vw,60px)}
+.bottom p{font-family:Anton;font-size:clamp(22px,3.5vw,34px);margin:6px 0 0;font-style:italic}
+.bottom p span{color:var(--red2)}
+.win .note{background:linear-gradient(160deg,#ffe58a,#f5b82e)}
+.sync{text-align:center;color:var(--muted);font-size:13px;margin:28px 0 0}
+.ctrl{margin-top:34px;background:var(--panel);border:1px solid #3a1416;border-radius:14px;padding:16px 18px}
+.ctrl summary{cursor:pointer;font-weight:600;min-height:32px;display:flex;align-items:center}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+button{font:600 16px Inter;min-height:44px;padding:0 18px;border-radius:10px;border:0;background:var(--red);color:#fff;cursor:pointer}
+button.ghost{background:transparent;border:1px solid #5a2a2c}
+button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+label{display:grid;gap:4px;font-size:14px;color:var(--muted)}
+input{font:16px Inter;min-height:44px;padding:0 12px;border-radius:10px;border:1px solid #5a2a2c;background:#0d0809;color:#fff}
+.hint{font-size:13px;color:var(--muted);margin:10px 0 0}
+@keyframes wave{to{transform:translateX(-200px)}}
+.wave{animation:wave 3.5s linear infinite}
+.liq{transition:transform 1.4s cubic-bezier(.2,.8,.2,1)}
+@media(prefers-reduced-motion:reduce){.wave{animation:none}.liq{transition:none}}
+@media(max-width:760px){.main{grid-template-columns:minmax(0,1fr)}.note{transform:rotate(1deg)}header .hand{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <header>
+    <div class="logo"><b>M</b>magazord</div>
+    <div class="hand">Pré-Vendas <span>em ação!</span></div>
+  </header>
+
+  <div class="title">
+    <h1>OPERAÇÃO<br><em>META</em> BATIDA</h1>
+    <p>ACELERE OS RESULTADOS E CONQUISTE O TOPO!</p>
+    <div class="flag"></div>
+  </div>
+
+  <section class="main">
+    <div class="jar">
+      <svg viewBox="-34 0 474 470" role="img" aria-label="Pote da meta" id="jarSvg">
+        <defs>
+          <clipPath id="body"><path d="M88 92 Q60 100 60 150 L60 400 Q60 440 100 440 L300 440 Q340 440 340 400 L340 150 Q340 100 312 92 Z"/></clipPath>
+          <linearGradient id="liqG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff3b2f"/><stop offset="1" stop-color="#8a0703"/></linearGradient>
+          <linearGradient id="glass" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset=".25" stop-color="#fff" stop-opacity=".04"/><stop offset=".8" stop-color="#fff" stop-opacity=".02"/><stop offset="1" stop-color="#fff" stop-opacity=".14"/></linearGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="6"/></filter>
+        </defs>
+        <ellipse cx="200" cy="450" rx="170" ry="16" fill="#e3120b" opacity=".35" filter="url(#glow)"/>
+        <g clip-path="url(#body)">
+          <rect x="40" y="80" width="320" height="380" fill="#120607"/>
+          <g class="liq" id="liq">
+            <g class="wave"><path d="M0 0 Q50 -10 100 0 T200 0 T300 0 T400 0 T500 0 T600 0 L600 400 L0 400 Z" fill="url(#liqG)"/></g>
+          </g>
+          <line id="projLine" x1="60" x2="340" stroke="#f5b82e" stroke-width="2" stroke-dasharray="4 6" opacity=".7"/>
+          <line id="goalLine" x1="60" x2="340" stroke="#f5b82e" stroke-width="3" stroke-dasharray="12 8"/>
+        </g>
+        <path d="M88 92 Q60 100 60 150 L60 400 Q60 440 100 440 L300 440 Q340 440 340 400 L340 150 Q340 100 312 92 Z" fill="url(#glass)" stroke="#ff8a7a" stroke-opacity=".6" stroke-width="3"/>
+        <rect x="92" y="58" width="216" height="36" rx="10" fill="#1c0b0c" stroke="#ff8a7a" stroke-opacity=".6" stroke-width="3"/>
+        <path d="M80 160 Q74 260 80 380" stroke="#fff" stroke-opacity=".35" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <g id="ticks"></g>
+        <g id="goalTag"></g>
+        <g id="center"></g>
+      </svg>
+    </div>
+
+    <div class="cards">
+      <div class="note">
+        <div class="k" id="faltaK">Falta apenas:</div>
+        <div class="big" id="faltaPct">20%</div>
+        <div class="strip" id="faltaQ">= 6 Qualificadas<small>2 por dia</small></div>
+      </div>
+      <div class="row">
+        <svg width="50" height="50" viewBox="0 0 50 50" aria-hidden="true"><rect x="4" y="8" width="42" height="38" rx="6" fill="#e3120b"/><rect x="4" y="8" width="42" height="11" rx="5" fill="#a30a05"/><rect x="13" y="3" width="5" height="10" rx="2" fill="#fff"/><rect x="32" y="3" width="5" height="10" rx="2" fill="#fff"/><g fill="#fff" opacity=".9"><rect x="11" y="24" width="6" height="5"/><rect x="22" y="24" width="6" height="5"/><rect x="33" y="24" width="6" height="5"/><rect x="11" y="34" width="6" height="5"/><rect x="22" y="34" width="6" height="5"/><rect x="33" y="34" width="6" height="5"/></g></svg>
+        <div><div class="t">Até dia</div><div class="v" id="prazo">30/11</div><div class="s" id="dias">3 dias úteis restantes</div></div>
+      </div>
+      <div class="row">
+        <svg width="50" height="50" viewBox="0 0 50 50" aria-hidden="true"><circle cx="25" cy="25" r="21" fill="none" stroke="#f5b82e" stroke-width="4" stroke-dasharray="6 5"/><path d="M25 13v13l8 5" stroke="#f5b82e" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+        <div><div class="t">Na pista</div><div class="v" id="pendV">3 agendadas</div><div class="s" id="pendS">Se qualificarem, o pote vai a 30%</div><div class="pend" id="pendDots"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="bottom">
+    <div class="hand" id="cta">Bora, time?</div>
+    <p id="cta2">JUNTOS ATÉ O <span>TOPO!</span></p>
+  </div>
+  <p class="sync" id="sync">Carregando números da planilha…</p>
+</div>
+
+<script>
+{
+const DEF={q:6,m:12,p:40,a:3,d:'2026-11-30'};
+let S={...DEF};
+try{const s=JSON.parse(localStorage.getItem('poteMeta')||'null');if(s)S={...DEF,...s}}catch(e){}
+const $=id=>document.getElementById(id);
+const TOP=110,BOT=440,H=BOT-TOP;
+const yOf=pct=>BOT-H*Math.min(pct,100)/100;
+const fmt=n=>(Math.round(n*10)/10).toString().replace('.',',');
+
+{let t='';for(let p=0;p<=100;p+=20){const y=yOf(p);t+=`<line x1="22" x2="58" y1="${y}" y2="${y}" stroke="#fff" stroke-width="3"/><text x="18" y="${y+6}" text-anchor="end" fill="#fff" font-family="Inter" font-weight="800" font-size="17">${p}%</text>`}$('ticks').innerHTML=t}
+
+function bizDays(end){
+  const e=new Date(end+'T23:59:59');const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+1);
+  let n=0;while(d<=e){const w=d.getDay();if(w&&w<6)n++;d.setDate(d.getDate()+1)}return n;
+}
+function save(){try{localStorage.setItem('poteMeta',JSON.stringify(S))}catch(e){}}
+
+function render(){
+  const per=S.p/S.m,cur=S.q*per,proj=(S.q+S.a)*per,falta=Math.max(0,S.p-cur),faltaQ=Math.max(0,S.m-S.q);
+  const dias=bizDays(S.d),porDia=dias?Math.ceil(faltaQ/dias):faltaQ,win=S.q>=S.m;
+  $('liq').style.transform=`translateY(${yOf(cur)}px)`;
+  const gy=yOf(S.p),py=yOf(proj);
+  $('goalLine').setAttribute('y1',gy);$('goalLine').setAttribute('y2',gy);
+  $('projLine').setAttribute('y1',py);$('projLine').setAttribute('y2',py);
+  $('projLine').style.display=S.a&&!win?'':'none';
+  $('goalTag').innerHTML=`<rect x="346" y="${gy-15}" width="84" height="30" rx="6" fill="#f5b82e"/><text x="388" y="${gy+6}" text-anchor="middle" font-family="Anton" font-size="17" fill="#1a1a1a">META ${S.p}%</text>`;
+  const cy2=220;
+  $('center').innerHTML=`<text x="200" y="${cy2}" text-anchor="middle" font-family="Anton" font-size="78" fill="#fff" stroke="#000" stroke-width="2" paint-order="stroke">${fmt(cur)}%</text><rect x="110" y="${cy2+12}" width="180" height="34" fill="#e3120b"/><text x="200" y="${cy2+36}" text-anchor="middle" font-family="Anton" font-size="20" fill="#fff">${win?'META BATIDA!':'CONQUISTADO!'}</text><text x="200" y="${cy2+72}" text-anchor="middle" font-family="Inter" font-weight="600" font-size="15" fill="#ffd6d2">${S.q} de ${S.m} qualificadas</text>`;
+  document.getElementById('app').classList.toggle('win',win);
+  $('faltaK').textContent=win?'Conquistamos:':'Falta apenas:';
+  $('faltaPct').textContent=win?`${fmt(cur)}%`:`${fmt(falta)}%`;
+  $('faltaQ').innerHTML=win?'Meta batida!<small>Agora é passar do topo</small>':`= ${faltaQ} Qualificada${faltaQ>1?'s':''}<small>${dias?`${porDia} por dia`:'último esforço'}</small>`;
+  const [y,mo,da]=S.d.split('-');$('prazo').textContent=`${da}/${mo}`;
+  $('dias').textContent=dias?`${dias} dia${dias>1?'s':''} út${dias>1?'eis':'il'} restante${dias>1?'s':''}`:'Prazo chegou';
+  $('pendV').textContent=`${S.a} agendada${S.a===1?'':'s'}`;
+  $('pendS').textContent=S.a?`Ainda não contam. Se todas qualificarem, o pote vai a ${fmt(proj)}% (linha tracejada)`:'Nenhuma reunião pendente';
+  $('pendDots').innerHTML='<i></i>'.repeat(Math.min(S.a,20));
+  $('cta').textContent=win?'É campeão, time!':'Bora, time?';
+}
+const SHEET_ID='1j05b9AT1NXB9OLjP1xqOVwUfTEJNJUPYubPtpUYNaSs';
+const REFRESH_MS=60000;
+const KEYS={'qualificadas':'q','meta de qualificadas':'m','meta no pote (%)':'p','agendadas a acontecer':'a','prazo':'d'};
+function toNum(c){if(!c)return NaN;if(typeof c.v==='number')return c.v;return parseFloat(String(c.f??c.v).replace(',','.'))}
+function toDate(c){
+  if(!c)return null;const f=String(c.f??''),v=String(c.v??'');
+  let m=f.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);if(m)return `${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;
+  m=v.match(/Date\((\d+),(\d+),(\d+)/);if(m)return `${m[1]}-${String(+m[2]+1).padStart(2,'0')}-${m[3].padStart(2,'0')}`;
+  m=(f||v).match(/(\d{4})-(\d{2})-(\d{2})/);return m?m[0]:null;
+}
+window.__pote=res=>{
+  try{
+    const rows=res.table.rows,n={};
+    for(const r of rows){const k=KEYS[String(r.c[0]?.v??'').trim().toLowerCase()];if(!k)continue;n[k]=k==='d'?toDate(r.c[1]):toNum(r.c[1])}
+    const ok=['q','m','p','a'].every(k=>Number.isFinite(n[k]));
+    if(!ok)throw new Error('dados incompletos');
+    S={q:Math.max(0,Math.round(n.q)),m:Math.max(1,Math.round(n.m)),p:Math.min(100,Math.max(1,n.p)),a:Math.max(0,Math.round(n.a)),d:n.d||S.d};
+    save();render();
+    $('sync').textContent='Atualizado às '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})+' · atualiza sozinho a cada minuto';
+  }catch(e){$('sync').textContent='Não consegui ler a planilha agora. Mostrando os últimos números salvos.'}
+};
+function load(){
+  const old=document.getElementById('gv');if(old)old.remove();
+  const sc=document.createElement('script');sc.id='gv';
+  sc.src=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json;responseHandler:__pote&sheet=Meta&range=A2:B6&headers=0&_=${Date.now()}`;
+  sc.onerror=()=>{$('sync').textContent='Sem conexão com a planilha. Mostrando os últimos números salvos.'};
+  document.body.appendChild(sc);
+}
+load();setInterval(load,REFRESH_MS);
+$('liq').style.transform=`translateY(${BOT}px)`;
+requestAnimationFrame(()=>requestAnimationFrame(render));
+}
+</script>
+</body>
+</html>
