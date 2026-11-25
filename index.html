@@ -19,8 +19,7 @@ LAYOUT: título no topo, pote à esquerda e cartões de corrida à direita; empi
 body{margin:0;background:radial-gradient(1200px 700px at 30% 40%,#3a0606 0%,#150405 45%,var(--bg) 75%);color:var(--ink);font:16px/1.5 Inter,system-ui,sans-serif;overflow-x:clip;min-height:100vh}
 .wrap{max-width:1180px;margin:0 auto;padding:clamp(18px,3vw,40px) max(4vw,16px) 40px}
 header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.5px}
-.logo b{display:grid;place-items:center;width:34px;height:34px;background:var(--red);border-radius:6px;font-family:Anton;font-size:22px;font-weight:400}
+.logo{display:block;height:clamp(30px,4vw,42px);width:auto}
 .hand{font-family:Kalam,cursive;font-size:clamp(26px,4vw,40px);line-height:1;transform:rotate(-4deg)}
 .hand span{color:var(--red2)}
 .title{text-align:center;margin:18px 0 6px}
@@ -71,7 +70,7 @@ input{font:16px Inter;min-height:44px;padding:0 12px;border-radius:10px;border:1
 <body>
 <div class="wrap" id="app">
   <header>
-    <div class="logo"><b>M</b>magazord</div>
+    <img class="logo" src="logo-magazord.png" alt="Magazord Digital Commerce" width="595" height="103">
     <div class="hand">Pré-Vendas <span>em ação!</span></div>
   </header>
 
