@@ -43,6 +43,7 @@ header{display:flex;justify-content:space-between;align-items:center;gap:16px;fl
 .row .s{color:var(--muted);font-size:14px}
 .pend{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
 .pend i{width:22px;height:22px;border-radius:50%;border:2px dashed var(--gold)}
+.pend i.ok{background:var(--red);border:2px solid var(--red2)}
 .bottom{text-align:center;margin-top:30px}
 .bottom .hand{display:inline-block;font-size:clamp(36px,6vw,60px)}
 .bottom p{font-family:Anton;font-size:clamp(22px,3.5vw,34px);margin:6px 0 0;font-style:italic}
@@ -119,7 +120,7 @@ input{font:16px Inter;min-height:44px;padding:0 12px;border-radius:10px;border:1
       </div>
       <div class="row">
         <svg width="50" height="50" viewBox="0 0 50 50" aria-hidden="true"><circle cx="25" cy="25" r="21" fill="none" stroke="#f5b82e" stroke-width="4" stroke-dasharray="6 5"/><path d="M25 13v13l8 5" stroke="#f5b82e" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
-        <div><div class="t">Na pista</div><div class="v" id="pendV">3 agendadas</div><div class="s" id="pendS">Se qualificarem, o pote vai a 30%</div><div class="pend" id="pendDots"></div></div>
+        <div><div class="t" id="pendT">Faltam qualificar</div><div class="v" id="pendV">2 reuniões</div><div class="s" id="pendS">Na pista: 2 agendadas</div><div class="pend" id="pendDots"></div></div>
       </div>
     </div>
   </section>
@@ -167,9 +168,10 @@ function render(){
   $('faltaQ').innerHTML=win?'Meta batida!<small>Agora é passar do topo</small>':`= ${faltaQ} Qualificada${faltaQ>1?'s':''}<small>${dias?`${porDia} por dia`:'último esforço'}</small>`;
   const [y,mo,da]=S.d.split('-');$('prazo').textContent=`${da}/${mo}`;
   $('dias').textContent=dias?`${dias} dia${dias>1?'s':''} út${dias>1?'eis':'il'} restante${dias>1?'s':''}`:'Prazo chegou';
-  $('pendV').textContent=`${S.a} agendada${S.a===1?'':'s'}`;
-  $('pendS').textContent=S.a?`Ainda não contam. Se todas qualificarem, o pote vai a ${fmt(proj)}% (linha tracejada)`:'Nenhuma reunião pendente';
-  $('pendDots').innerHTML='<i></i>'.repeat(Math.min(S.a,20));
+  $('pendT').textContent=win?'Qualificadas':'Faltam qualificar';
+  $('pendV').textContent=win?`${S.q} de ${S.m}`:`${faltaQ} reuni${faltaQ===1?'ão':'ões'}`;
+  $('pendS').textContent=win?'Meta batida! Tudo o que vier agora é bônus.':(S.a?`Na pista: ${S.a} agendada${S.a===1?'':'s'}. Se todas qualificarem, o pote vai a ${fmt(proj)}% (linha tracejada)`:'Nenhuma reunião agendada na pista');
+  $('pendDots').innerHTML='<i class="ok"></i>'.repeat(Math.min(S.q,S.m))+'<i></i>'.repeat(Math.min(faltaQ,30));
   $('cta').textContent=win?'É campeão, time!':'Bora, time?';
 }
 const SHEET_ID='1j05b9AT1NXB9OLjP1xqOVwUfTEJNJUPYubPtpUYNaSs';
